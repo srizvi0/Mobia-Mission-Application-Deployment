@@ -1,37 +1,32 @@
-apiVersion: app/v1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: app-deploy 
+  name: appdeploy 
 spec:
-  replicas: 2 
+  replicas: 2
   selector:
     matchLabels:
-      apps: myapp
+      app: myapp
   template:
     metadata:
       labels:
-        apps: myapp
+        app: myapp 
     spec:
       containers:
-        name:
-        image:
-      ports:
-        containerPort: 
+        - name: your-container-name  # Provide a name for your container
+          image: your-image-name:tag  # Provide the name of your Docker image along with the tag
+          ports:
+          - containerPort: 80
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: app-serv
+  name: appserv
 spec:
   selector:
-    apps: myapp
+    app: myapp
   ports:
-    protocol: "TCP"
-    port:
-    targetPort:
+  - protocol: "TCP"
+    port: 80
+    targetPort: 80
   type: LoadBalancer
-  
-
-
-
-
