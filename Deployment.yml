@@ -1,16 +1,16 @@
 apiVersion: app/v1
 kind: Deployment
 metadata:
-  name: deployment-1
+  name: deployment1
 spec:
   replicas: 2 
   selector:
     matchLabels:
-      apps: my-app
+      apps: myapp
   template:
     metadata:
       labels:
-        apps: my-app
+        apps: myapp
     spec:
       containers:
         name:
@@ -21,16 +21,17 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: service-1
+  name: service1
 spec:
   selector:
-    apps: my-app
+    apps: myapp
   ports:
     protocol: "TCP"
     port:
     targetPort:
   type: LoadBalancer
   
+
 
 
 
