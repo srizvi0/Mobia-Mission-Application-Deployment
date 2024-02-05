@@ -39,9 +39,30 @@ stages:
         ArtifactName: 'manifests'
         publishLocation: 'Container'
 
+- stage: SecurityScan
+  displayName: Static Application Security Testing
+  dependsOn: Build
+  jobs:
+  - job: BanditScan
+    displayName: Run Bandit SAST
+    pool:
+      vmImage: ubuntu-latest
+    steps:
+    - task: UsePythonVersion@0
+      inputs:
+        versionSpec: '3.x'
+        addToPath: true
+
+    - script: |
+        pip install bandit
+        bandit -r $(Build.SourcesDirectory)
+      displayName: Run Bandit SAST
+
+
 - stage: Deploy
   displayName: Deploy
-  dependsOn: Build 
+  dependsOn: 
+  - SecurityScan
   jobs:
   - job: Deploy
     displayName: Deploy to AKS
