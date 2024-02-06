@@ -13,8 +13,8 @@ spec:
         app: myapp 
     spec:
       containers:
-        - name: your-container-name  # Provide a name for your container
-          image: your-image-name:tag  # Provide the name of your Docker image along with the tag
+        - name: your-container-name  
+          image: your-image-name:tag  
           ports:
           - containerPort: 80
 ---
